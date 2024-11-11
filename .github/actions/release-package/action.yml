@@ -55,9 +55,9 @@ runs:
       git config --global user.name 'github-actions'
       git config --global user.email 'github-actions@github.com'
       python3 -m pdm run tbump $VERSION --non-interactive 
-      gh pr create --title "New Release v$VERSION" --body "This pull request was created by Github Actions." --base main
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   gh pr create --title "New Release v$VERSION" --body "This pull request was created by Github Actions." --base main
+    # env:
+    #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     shell: bash
 
 #### MAIN ######
