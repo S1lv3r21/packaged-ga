@@ -16,7 +16,7 @@ runs:
       
     - name: ls
       shell: bash
-      run: ls -Rla
+      run: ls -Rl
 
     - name: Run hello.py
       shell: bash
