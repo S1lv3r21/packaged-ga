@@ -12,71 +12,78 @@ runs:
   - name: Update
     run: sudo apt-get update
     shell: bash
+    
+  - name: Install Tree
+    run: sudo apt-get install tree
+    shell: bash
 
   - name: Verify Python
     run: python3 --version
     shell: bash
-  
+
+  - name: Print out the Tree
+    run: tree
+    shell: bash
 ### TESTING ###
-  - name: Install dependencies
-    run: |
-      python3 -m pip install pdm twine
-      python3 -m pdm --version
-      python3 -m pdm install --dev
-    shell: bash
+#   - name: Install dependencies
+#     run: |
+#       python3 -m pip install pdm twine
+#       python3 -m pdm --version
+#       python3 -m pdm install --dev
+#     shell: bash
 
-  - name: Run pytest
-    run: python3 -m pdm run pytest tests
-    shell: bash
+#   - name: Run pytest
+#     run: python3 -m pdm run pytest tests
+#     shell: bash
 
-  - name: Collect pytest coverage
-    run: python3 -m pdm run pytest --cov=$PKG --cov-report term-missing --cov-report html tests
-    shell: bash
-### GITHUB TAGS ###
-  - name: Fetch all tags 
-    run: git fetch --tags
-    shell: bash
+#   - name: Collect pytest coverage
+#     run: python3 -m pdm run pytest --cov=$PKG --cov-report term-missing --cov-report html tests
+#     shell: bash
+# ### GITHUB TAGS ###
+#   - name: Fetch all tags 
+#     run: git fetch --tags
+#     shell: bash
 
-  - name: Check if new release is required
-    run: python3 .github/actions/release-package/check_new_version.py
-    shell: bash
+#   - name: Check if new release is required
+#     run: python3 .github/actions/release-package/check_new_version.py
+#     shell: bash
 
-### DEV ##### 
-  - name: Continue with existing version
-    if: env.result == 0 && github.ref == 'refs/heads/dev'
-    run: |
-        echo "Current version: v$VERSION"
-    shell: bash
+# ### DEV ##### 
+#   - name: Continue with existing version
+#     if: env.result == 0 && github.ref == 'refs/heads/dev'
+#     run: |
+#         echo "Current version: v$VERSION"
+#     shell: bash
 
-  - name: Bump to new version and create Pull Request
-    if: env.result == 128 && github.ref == 'refs/heads/dev'
-    run: |
-      echo "Creating a new release v$VERSION"
-      git config --global user.name 'github-actions'
-      git config --global user.email 'github-actions@github.com'
-      python3 -m pdm run tbump $VERSION --non-interactive 
-    #   gh pr create --title "New Release v$VERSION" --body "This pull request was created by Github Actions." --base main
-    # env:
-    #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    shell: bash
+#   - name: Bump to new version and create Pull Request
+#     if: env.result == 128 && github.ref == 'refs/heads/dev'
+#     run: |
+#       echo "Creating a new release v$VERSION"
+#       git config --global user.name 'github-actions'
+#       git config --global user.email 'github-actions@github.com'
+#       python3 -m pdm run tbump $VERSION --non-interactive 
+#     #   gh pr create --title "New Release v$VERSION" --body "This pull request was created by Github Actions." --base main
+#     # env:
+#     #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     shell: bash
 
-#### MAIN ######
-  - name: Build package
-    if: github.ref == 'refs/heads/main'
-    run: python3 -m pdm build --no-sdist
-    shell: bash
+# #### MAIN ######
+#   - name: Build package
+#     if: github.ref == 'refs/heads/main'
+#     run: python3 -m pdm build --no-sdist
+#     shell: bash
 
-  - name: Build documentation
-    if: github.ref == 'refs/heads/main'
-    run: |
-      python3 -m pdm install --dev
-      python3 -m pdm run sphinx-build . _html
-      # python3 -m pdm run python3 -m zipfile -c "dist/$PKG-$VERSION.doc.zip" _html/*
-    shell: bash
+#   - name: Build documentation
+#     if: github.ref == 'refs/heads/main'
+#     run: |
+#       python3 -m pdm install --dev
+#       python3 -m pdm run sphinx-build . _html
+#       # python3 -m pdm run python3 -m zipfile -c "dist/$PKG-$VERSION.doc.zip" _html/*
+#     shell: bash
 
-  # - name: Upload to Test Pypi
-  #   if: github.ref == 'refs/heads/main'
-  #   run: twine upload --repository-url https://test.pypi.org/legacy/ dist/*
-  #   env:
-  #     TWINE_USERNAME: __token__
-  #     TWINE_PASSWORD: ${{ secrets.TEST_PYPI_API_TOKEN }}
+#   # - name: Upload to Test Pypi
+#   #   if: github.ref == 'refs/heads/main'
+#   #   run: twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+#   #   env:
+#   #     TWINE_USERNAME: __token__
+#   #     TWINE_PASSWORD: ${{ secrets.TEST_PYPI_API_TOKEN }}
