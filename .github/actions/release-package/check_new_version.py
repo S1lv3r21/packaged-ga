@@ -19,5 +19,5 @@ with open('RELEASE_NOTES.md', 'r') as file:
 
 # set environment variable for GitHub Action usage
 with open(os.getenv('GITHUB_ENV'), 'w+') as git_env:
-    git_env.write(f"result={RESULT}\n")
-    git_env.write(f"version={VERSION}")
+    git_env.write(f"RESULT={RESULT}\n")
+    git_env.write(f"VERSION={VERSION}")
