@@ -3,7 +3,7 @@ name: "Release Package"
 # description: "Release Package workflow to install dependencies, run tests, and check code quality."
 description: A simple packaged action to print Hello, <name>
 inputs:
-  name:
+  greet_name:
     description: "Name of the person to greet"
     required: true
     default: "World"
@@ -15,4 +15,4 @@ runs:
       uses: actions/checkout@v3
 
     - name: Run hello.py
-      run: python hello.py ${{name}}
+      run: python hello.py ${{greet_name}}
