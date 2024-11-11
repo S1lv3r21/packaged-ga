@@ -12,4 +12,4 @@ jobs:
     - name: Greet <name>
       uses: S1lv3r21/packaged-ga/@main
       with:
-        name: "Every-one"
+        greet_name: "Every-one"
