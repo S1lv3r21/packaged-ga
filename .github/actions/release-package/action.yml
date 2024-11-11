@@ -20,4 +20,4 @@ runs:
 
     - name: Run hello.py
       shell: bash
-      run: python .github/actions/release-package/hello.py ${{ inputs.greet_name }}
+      run: python hello.py ${{ inputs.greet_name }}
