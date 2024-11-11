@@ -14,5 +14,5 @@ runs:
     - name: Check out code
       uses: actions/checkout@v3
 
-    - name: Run hello.py
+    - name: Run hello file
       run: python hello.py ${{ inputs.greet_name }}
