@@ -1,0 +1,15 @@
+name: Print Hello <name>
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Greet <name>
+      uses: S1lv3r21/packaged_ga/actions/release-package/@main
+      with:
+        name: "Every-one"
