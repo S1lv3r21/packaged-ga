@@ -11,12 +11,12 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Check out code
-      uses: actions/checkout@v3
+    # - name: Check out code
+    #   uses: actions/checkout@v3
       
-    - name: ls
-      shell: bash
-      run: ls -Rl
+    # - name: ls
+    #   shell: bash
+    #   run: ls -Rl
 
     - name: Run hello.py
       shell: bash
