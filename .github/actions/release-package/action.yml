@@ -1,14 +1,17 @@
 name: Run pytest, bump version and make a release
 
-# description: "Release Package workflow to install dependencies, run tests, and check code quality."
-description: A simple packaged action to print Hello, <name>
+description: "Release Package workflow to install dependencies, run tests, and check code quality."
 inputs:
-  PKG: # try to get this from the user's toml file
+  PKG: # try to get this from the user's toml file?
     description: "Name of the package being packaged"
     required: true
 
 runs:
   using: "composite"
+  defaults:
+    run:
+      shell: bash  # Set default shell to bash for all steps
+      
   steps:
   - name: Update
     run: sudo apt-get update
