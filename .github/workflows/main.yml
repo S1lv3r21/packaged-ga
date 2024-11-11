@@ -10,6 +10,6 @@ jobs:
 
     steps:
     - name: Greet <name>
-      uses: S1lv3r21/packaged-ga/@main
+      uses: S1lv3r21/packaged-ga/release-package/@main
       with:
-        greet_name: "Every-one"
+        greet_name: "Release-package"
