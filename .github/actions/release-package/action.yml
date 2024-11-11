@@ -13,6 +13,10 @@ runs:
   steps:
     - name: Check out code
       uses: actions/checkout@v3
+      
+    - name: ls
+      shell: bash
+      run: ls -Rla
 
     - name: Run hello.py
       shell: bash
