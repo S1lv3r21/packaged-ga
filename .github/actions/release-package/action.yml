@@ -8,16 +8,14 @@ inputs:
 
 runs:
   using: "composite"
-  defaults:
-    run:
-      shell: bash  # Set default shell to bash for all steps
-      
   steps:
   - name: Update
     run: sudo apt-get update
+    shell: bash
 
   - name: Verify Python
     run: python3 --version
+    shell: bash
   
 ### TESTING ###
   - name: Install dependencies
@@ -25,24 +23,30 @@ runs:
       python3 -m pip install pdm twine
       python3 -m pdm --version
       python3 -m pdm install --dev
+    shell: bash
 
   - name: Run pytest
     run: python3 -m pdm run pytest tests
+    shell: bash
 
   - name: Collect pytest coverage
     run: python3 -m pdm run pytest --cov=$PKG --cov-report term-missing --cov-report html tests
+    shell: bash
 ### GITHUB TAGS ###
   - name: Fetch all tags 
     run: git fetch --tags
+    shell: bash
 
   - name: Check if new release is required
     run: python3 .github/actions/release-package/check_new_version.py
+    shell: bash
 
 ### DEV ##### 
   - name: Continue with existing version
     if: env.result == 0 && github.ref == 'refs/heads/dev'
     run: |
         echo "Current version: v$VERSION"
+    shell: bash
 
   - name: Bump to new version and create Pull Request
     if: env.result == 128 && github.ref == 'refs/heads/dev'
@@ -54,11 +58,13 @@ runs:
       gh pr create --title "New Release v$VERSION" --body "This pull request was created by Github Actions." --base main
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    shell: bash
 
 #### MAIN ######
   - name: Build package
     if: github.ref == 'refs/heads/main'
     run: python3 -m pdm build --no-sdist
+    shell: bash
 
   - name: Build documentation
     if: github.ref == 'refs/heads/main'
@@ -66,6 +72,7 @@ runs:
       python3 -m pdm install --dev
       python3 -m pdm run sphinx-build . _html
       # python3 -m pdm run python3 -m zipfile -c "dist/$PKG-$VERSION.doc.zip" _html/*
+    shell: bash
 
   # - name: Upload to Test Pypi
   #   if: github.ref == 'refs/heads/main'
