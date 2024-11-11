@@ -15,4 +15,4 @@ runs:
       uses: actions/checkout@v3
 
     - name: Run hello.py
-      run: python hello.py ${{  greet_name  }}
+      run: python hello.py ${{ inputs.greet_name }}
