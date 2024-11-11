@@ -10,6 +10,6 @@ jobs:
 
     steps:
     - name: Greet <name>
-      uses: S1lv3r21/packaged-ga/actions/release-package@main
+      uses: S1lv3r21/packaged-ga/.github/actions/release-package@main
       with:
         greet_name: "Release-package"
