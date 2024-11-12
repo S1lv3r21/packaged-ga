@@ -31,6 +31,11 @@ runs:
   - name: Find Python files
     run: find . -wholename "*.py"
     shell: bash
+  
+  - name: Fetch PKG name
+    run: python3 ./packaged-ga/.github/actions/release-package/fetch_pkg_name.py
+    shell: bash
+    
 ### TESTING ###
   - name: Print Line for readability
     run: echo -e "\033[1;32m============================== TESTING ===============================\033[0m"
