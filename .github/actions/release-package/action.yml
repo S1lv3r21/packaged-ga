@@ -84,13 +84,13 @@ runs:
     shell: bash
     
   - name: Continue with existing version
-    if: env.result == 0 && github.ref == 'refs/heads/dev'
+    if: env.RESULT == 0 && github.ref == 'refs/heads/dev'
     run: |
         echo "Current version: v$VERSION"
     shell: bash
 
   - name: Bump to new version and create Pull Request
-    if: env.result == 128 && github.ref == 'refs/heads/dev'
+    if: env.RESULt == 128 && github.ref == 'refs/heads/dev'
     run: |
       echo "Creating a new release v$VERSION"
       git config --global user.name 'github-actions'
