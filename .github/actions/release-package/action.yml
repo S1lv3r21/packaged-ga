@@ -31,7 +31,7 @@ runs:
     
   - name: Install dependencies
     run: |
-      python3 -m pip install pdm twine -qq
+      python3 -m pip install pdm twine -qqq
       python3 -m pdm --version
       python3 -m pdm install --dev --quiet
     shell: bash
@@ -82,6 +82,7 @@ runs:
 
 #### MAIN ######
   - name: Print Line for readability
+    if: github.ref == 'refs/heads/main'
     run: echo -e "\033[1;32m============================== BUILD PACKAGE/DOC AND MAKE RELEASE ===============================\033[0m"
     shell: bash
     
