@@ -14,7 +14,7 @@ runs:
     shell: bash
     
   - name: Install Tree
-    run: sudo apt-get install tree
+    run: sudo apt-get install tree -qq
     shell: bash
 
   - name: Verify Python
@@ -33,7 +33,7 @@ runs:
     run: |
       python3 -m pip install pdm twine -qq
       python3 -m pdm --version
-      python3 -m pdm install --dev --quite
+      python3 -m pdm install --dev --quiet
     shell: bash
 
   - name: Run pytest
