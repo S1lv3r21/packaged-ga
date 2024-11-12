@@ -7,7 +7,6 @@ import subprocess
 # default values for empty release_notes.md file
 RESULT = "-1" 
 VERSION = ""   
-PKG = ""
 
 with open("RELEASE_NOTES.md", "r") as file:
     for line in file:
@@ -24,6 +23,6 @@ if not VERSION:
     print("Version not found in RELEASE_NOTES.md file.")
     sys.exit(1)
 # set environment variable for GitHub Action usage
-with open(os.getenv('GITHUB_ENV'), 'w+') as git_env:
+with open(os.getenv('GITHUB_ENV'), 'a') as git_env:
     git_env.write(f"RESULT={RESULT}\n")
     git_env.write(f"VERSION={VERSION}")
