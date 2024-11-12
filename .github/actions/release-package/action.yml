@@ -25,6 +25,11 @@ runs:
     run: find . -wholename "*.py"
     shell: bash
 ### TESTING ###
+  - name: Print Line for readability
+    run: |
+      echo "---------------------------------------------------------------------------------------------------------------------------------------------------"
+      echo "TESTING\n"
+    shell: bash
   - name: Install dependencies
     run: |
       python3 -m pip install pdm twine
@@ -39,7 +44,14 @@ runs:
   - name: Collect pytest coverage
     run: python3 -m pdm run pytest --cov="${{ inputs.PKG }}" --cov-report term-missing --cov-report html tests
     shell: bash
-### GITHUB TAGS ###
+    
+### GITHUB TAGS ###    
+  - name: Print Line for readability
+    run: |
+      echo "---------------------------------------------------------------------------------------------------------------------------------------------------"
+      echo "FETCH TAGS AND CHECK NEW RELEASE IS REQUIRED\n"
+    shell: bash
+
   - name: Fetch all tags 
     run: git fetch --tags
     shell: bash
@@ -49,6 +61,12 @@ runs:
     shell: bash
 
 ### DEV ##### 
+  - name: Print Line for readability
+    run: |
+      echo "---------------------------------------------------------------------------------------------------------------------------------------------------"
+      echo "UPDATE DEV BRANCH\n"
+    shell: bash
+    
   - name: Continue with existing version
     if: env.result == 0 && github.ref == 'refs/heads/dev'
     run: |
@@ -68,6 +86,12 @@ runs:
     shell: bash
 
 #### MAIN ######
+  - name: Print Line for readability
+    run: |
+      echo "---------------------------------------------------------------------------------------------------------------------------------------------------"
+      echo "BUILD PACKAGE/DOC AND MAKE RELEASE\n"
+    shell: bash
+    
   - name: Build package
     if: github.ref == 'refs/heads/main'
     run: python3 -m pdm build --no-sdist
