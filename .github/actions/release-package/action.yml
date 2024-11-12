@@ -45,7 +45,7 @@ runs:
     shell: bash
 
   - name: Check if new release is required
-    run: python3 .github/actions/release-package/check_new_version.py
+    run: python3 ./packaged-ga/.github/actions/release-package/check_new_version.py
     shell: bash
 
 ### DEV ##### 
