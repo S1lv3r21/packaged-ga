@@ -73,6 +73,10 @@ runs:
   - name: Check if new release is required
     run: python3 ./packaged-ga/.github/actions/release-package/check_new_version.py
     shell: bash
+  
+  - name: Print RESULT/VERSION/PKG name
+    run: echo -e "\033[33mRESULT = $RESULT, VERSION = $VERSION, PKG = $PKG\033[0m"
+    shell: bash
 
 ### DEV ##### 
   - name: Print Line for readability
