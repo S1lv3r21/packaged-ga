@@ -27,8 +27,8 @@ runs:
 ### TESTING ###
   - name: Print Line for readability
     run: |
-      echo "---------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "TESTING\n"
+      echo "============================== TESTING ==============================="
+      echo -e "\033[1;32mThis is bold green text\033[0m"
     shell: bash
   - name: Install dependencies
     run: |
@@ -48,8 +48,8 @@ runs:
 ### GITHUB TAGS ###    
   - name: Print Line for readability
     run: |
-      echo "---------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "FETCH TAGS AND CHECK NEW RELEASE IS REQUIRED\n"
+      echo "========================= FETCH TAGS AND CHECK NEW RELEASE IS REQUIRED =========================="
+      echo -e "\033[1;32mThis is bold green text\033[0m"
     shell: bash
 
   - name: Fetch all tags 
@@ -63,8 +63,8 @@ runs:
 ### DEV ##### 
   - name: Print Line for readability
     run: |
-      echo "---------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "UPDATE DEV BRANCH\n"
+      echo "============================== UPDATE DEV BRANCH ==============================="
+      echo -e "\033[1;32mThis is bold green text\033[0m"
     shell: bash
     
   - name: Continue with existing version
@@ -88,8 +88,8 @@ runs:
 #### MAIN ######
   - name: Print Line for readability
     run: |
-      echo "---------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "BUILD PACKAGE/DOC AND MAKE RELEASE\n"
+      echo "============================== "BUILD PACKAGE/DOC AND MAKE RELEASE ==============================="
+      echo -e "\033[1;32mThis is bold green text\033[0m"
     shell: bash
     
   - name: Build package
