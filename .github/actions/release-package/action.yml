@@ -90,7 +90,7 @@ runs:
     shell: bash
 
   - name: Bump to new version and create Pull Request
-    if: env.RESULt == 128 && github.ref == 'refs/heads/dev'
+    if: env.RESULT == 128 && github.ref == 'refs/heads/dev'
     run: |
       echo "Creating a new release v$VERSION"
       git config --global user.name 'github-actions'
