@@ -19,6 +19,10 @@ runs:
   - name: Update
     run: sudo apt-get update -qq
     shell: bash
+
+  - name: Use secret in a script
+    run: | 
+      aaa = ${{ secrets.RAISE_PR_PYTHON_WORKFLOW }}   echo $aaa
     
   - name: Install Tree
     run: sudo apt-get install tree -qq
@@ -98,8 +102,8 @@ runs:
       python3 -m pdm run tbump $VERSION --non-interactive 
       gh pr create --title "New Release v$VERSION" --body "This pull request was created by Github Actions." --base main
     # created a github token in global developers settings and added it as a repository secret under repository settings
-    env:
-      GITHUB_TOKEN: ${{ secrets.RAISE_PR_PYTHON_WORKFLOW }} 
+    # env:
+    #   GITHUB_TOKEN: ${{ secrets.RAISE_PR_PYTHON_WORKFLOW }} 
     shell: bash
 
 #### MAIN ######
