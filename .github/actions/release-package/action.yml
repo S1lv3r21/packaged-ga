@@ -38,7 +38,7 @@ runs:
     shell: bash
     
   - name: Print PKG name
-    run: echo -e "\033[33m$PKG\033[0m"
+    run: echo -e "\033[33mPKG = $PKG\033[0m"
     shell: bash
     
 ### TESTING ###
