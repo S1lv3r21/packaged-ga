@@ -1,10 +1,10 @@
 name: Run pytest, bump version and make a release
 
 description: "Release Package workflow to install dependencies, run tests, and check code quality."
-inputs:
-  PKG: # try to get this from the user's toml file?
-    description: "Name of the package being packaged"
-    required: true
+# inputs:
+#   PKG: # try to get this from the user's toml file?
+#     description: "Name of the package being packaged"
+#     required: true
 
 runs:
   using: "composite"
@@ -48,7 +48,7 @@ runs:
     shell: bash
 
   - name: Collect pytest coverage
-    run: python3 -m pdm run pytest --cov="${{ inputs.PKG }}" --cov-report term-missing --cov-report html tests
+    run: python3 -m pdm run pytest --cov=$PKG --cov-report term-missing --cov-report html tests
     shell: bash
     
 ### GITHUB TAGS ###    
@@ -103,7 +103,7 @@ runs:
     run: |
       python3 -m pdm install --dev
       python3 -m pdm run sphinx-build . _html
-      # python3 -m pdm run python3 -m zipfile -c "dist/${{ inputs.PKG }}-$VERSION.doc.zip" _html/*
+      # python3 -m pdm run python3 -m zipfile -c "dist/$PKG-$VERSION.doc.zip" _html/*
     shell: bash
 
   # - name: Upload to Test Pypi
