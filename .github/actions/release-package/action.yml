@@ -9,6 +9,13 @@ inputs:
 runs:
   using: "composite"
   steps:
+      # Lines 19-23 should go in the packager
+  - name: Check out the packaged-ga repository
+    uses: actions/checkout@v3
+    with:
+      repository: S1lv3r21/packaged-ga
+      path: 'packaged-ga'  # Specify the directory 
+  
   - name: Update
     run: sudo apt-get update -qq
     shell: bash
