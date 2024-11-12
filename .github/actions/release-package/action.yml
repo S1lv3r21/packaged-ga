@@ -31,9 +31,9 @@ runs:
     
   - name: Install dependencies
     run: |
-      python3 -m pip install pdm twine 
+      python3 -m pip install pdm twine -qq
       python3 -m pdm --version
-      python3 -m pdm install --dev
+      python3 -m pdm install --dev --quite
     shell: bash
 
   - name: Run pytest
