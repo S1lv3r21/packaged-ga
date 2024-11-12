@@ -21,8 +21,8 @@ runs:
     run: python3 --version
     shell: bash
 
-  - name: Print out the Tree
-    run: tree
+  - name: Find Python files
+    run: find . -wholename "*.py"
     shell: bash
 ### TESTING ###
   - name: Install dependencies
