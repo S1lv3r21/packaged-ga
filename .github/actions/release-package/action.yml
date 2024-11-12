@@ -10,7 +10,7 @@ runs:
   using: "composite"
   steps:
   - name: Update
-    run: sudo apt-get update
+    run: sudo apt-get update -qq
     shell: bash
     
   - name: Install Tree
@@ -31,7 +31,7 @@ runs:
     
   - name: Install dependencies
     run: |
-      python3 -m pip install pdm twine
+      python3 -m pip install pdm twine 
       python3 -m pdm --version
       python3 -m pdm install --dev
     shell: bash
