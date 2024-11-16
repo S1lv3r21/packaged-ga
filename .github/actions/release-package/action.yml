@@ -23,6 +23,7 @@ runs:
   - name: Use secret in a script
     run: | 
       aaa = ${{ secrets.RAISE_PR_PYTHON_WORKFLOW }}   ; echo $aaa
+    shell: bash
     
   - name: Install Tree
     run: sudo apt-get install tree -qq
