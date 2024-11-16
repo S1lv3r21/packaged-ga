@@ -23,10 +23,10 @@ runs:
     run: sudo apt-get update -qq
     shell: bash
 
-  - name: Use secret in a script
-    run: | 
-      aaa = ${{ inputs.RAISE_PR }}   ; echo $aaa
-    shell: bash
+  # - name: Use secret in a script
+  #   run: | 
+  #     aaa = ${{ inputs.RAISE_PR }}   ; echo $aaa
+  #   shell: bash
     
   - name: Install Tree
     run: sudo apt-get install tree -qq
