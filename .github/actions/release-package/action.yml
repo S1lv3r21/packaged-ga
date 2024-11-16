@@ -1,10 +1,13 @@
 name: Run pytest, bump version and make a release
 
 description: "Release Package workflow to install dependencies, run tests, and check code quality."
-# inputs:
-#   PKG: # try to get this from the user's toml file?
-#     description: "Name of the package being packaged"
-#     required: true
+inputs:
+  RAISE_PR: 
+    description: "The secret needed to raise a PR"
+    required: true
+  # PKG: # try to get this from the user's toml file?
+  #   description: "Name of the package being packaged"
+  #   required: true
 
 runs:
   using: "composite"
@@ -22,7 +25,7 @@ runs:
 
   - name: Use secret in a script
     run: | 
-      aaa = ${{ secrets.RAISE_PR_PYTHON_WORKFLOW }}   ; echo $aaa
+      aaa = ${{ inputs.RAISE_PR }}   ; echo $aaa
     shell: bash
     
   - name: Install Tree
@@ -103,8 +106,8 @@ runs:
       python3 -m pdm run tbump $VERSION --non-interactive 
       gh pr create --title "New Release v$VERSION" --body "This pull request was created by Github Actions." --base main
     # created a github token in global developers settings and added it as a repository secret under repository settings
-    # env:
-    #   GITHUB_TOKEN: ${{ secrets.RAISE_PR_PYTHON_WORKFLOW }} 
+    env:
+      GITHUB_TOKEN: ${{ inputs.RAISE_PR }} 
     shell: bash
 
 #### MAIN ######
