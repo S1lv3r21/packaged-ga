@@ -129,7 +129,7 @@ runs:
     run: |
       python3 -m pdm install --dev
       python3 -m pdm run sphinx-build . _html
-      # python3 -m pdm run python3 -m zipfile -c "dist/$PKG-$VERSION.doc.zip" _html/*
+      python3 -m pdm run python3 -m zipfile -c "dist/$PKG-$VERSION.doc.zip" _html/*
     shell: bash
 
   - name: Upload to Test Pypi
