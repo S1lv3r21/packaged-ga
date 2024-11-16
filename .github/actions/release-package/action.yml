@@ -135,6 +135,7 @@ runs:
   - name: Upload to Test Pypi
     if: github.ref == 'refs/heads/main'
     run: twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+    shell: bash
     env:
       TWINE_USERNAME: __token__
       TWINE_PASSWORD: ${{ inputs.TWINE_TOKEN }}
