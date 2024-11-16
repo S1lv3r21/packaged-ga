@@ -5,6 +5,9 @@ inputs:
   RAISE_PR: 
     description: "The secret needed to raise a PR"
     required: true
+  TWINE_TOKEN: 
+    description: "The secret needed to release the package to test pypi"
+    required: true
   # PKG: # try to get this from the user's toml file?
   #   description: "Name of the package being packaged"
   #   required: true
@@ -129,9 +132,9 @@ runs:
       # python3 -m pdm run python3 -m zipfile -c "dist/$PKG-$VERSION.doc.zip" _html/*
     shell: bash
 
-  # - name: Upload to Test Pypi
-  #   if: github.ref == 'refs/heads/main'
-  #   run: twine upload --repository-url https://test.pypi.org/legacy/ dist/*
-  #   env:
-  #     TWINE_USERNAME: __token__
-  #     TWINE_PASSWORD: ${{ secrets.TEST_PYPI_API_TOKEN }}
+  - name: Upload to Test Pypi
+    if: github.ref == 'refs/heads/main'
+    run: twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+    env:
+      TWINE_USERNAME: __token__
+      TWINE_PASSWORD: ${{ inputs.TWINE_TOKEN }}
