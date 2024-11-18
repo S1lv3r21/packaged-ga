@@ -133,7 +133,7 @@ runs:
     shell: bash
   - name: LS
     if: github.ref == 'refs/heads/main'
-    run: ls -la ./dist
+    run: tree ./dist
     shell: bash
 
   - name: Upload to Test Pypi
