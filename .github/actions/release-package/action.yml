@@ -126,7 +126,7 @@ runs:
 
   - name: TREE BEFORE PDM
     if: github.ref == 'refs/heads/main'
-    run: tree ./dist
+    run: tree
     shell: bash
 
   - name: Build package
