@@ -30,11 +30,6 @@ runs:
   #   run: | 
   #     aaa = ${{ inputs.RAISE_PR }}   ; echo $aaa
   #   shell: bash
-
-  - name: LS
-    if: github.ref == 'refs/heads/main'
-    run: tree ./dist
-    shell: bash
     
   - name: Install Tree
     run: sudo apt-get install tree -qq
