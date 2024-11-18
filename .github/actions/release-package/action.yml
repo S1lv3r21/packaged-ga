@@ -131,10 +131,14 @@ runs:
       python3 -m pdm run sphinx-build . _html
       python3 -m pdm run python3 -m zipfile -c "dist/$PKG-$VERSION.doc.zip" _html/*
     shell: bash
+  - name: LS
+    if: github.ref == 'refs/heads/main'
+    run: ls -la
+    shell: bash
 
   - name: Upload to Test Pypi
     if: github.ref == 'refs/heads/main'
-    run: twine upload --repository-url https://test.pypi.org/legacy/  packaged-ga/dist/*
+    run: twine upload --repository-url https://test.pypi.org/legacy/  dist/*
     shell: bash
     env:
       TWINE_USERNAME: __token__
