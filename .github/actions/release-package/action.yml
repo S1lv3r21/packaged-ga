@@ -128,7 +128,12 @@ runs:
     if: github.ref == 'refs/heads/main'
     run: python3 -m pdm build --no-sdist
     shell: bash
-
+    
+  - name: List contents of wheel file
+    if: github.ref == 'refs/heads/main'
+    run: unzip -l dist/*.whl
+    shell: bash
+  
   - name: Build documentation
     if: github.ref == 'refs/heads/main'
     run: |
@@ -136,6 +141,7 @@ runs:
       python3 -m pdm run sphinx-build . _html
       python3 -m pdm run python3 -m zipfile -c "dist/$PKG-$VERSION.doc.zip" _html/*
     shell: bash
+    
   # - name: LS
   #   if: github.ref == 'refs/heads/main'
   #   run: tree ./dist
@@ -143,9 +149,9 @@ runs:
 
   - name: Upload to Test Pypi
     if: github.ref == 'refs/heads/main'
-    # run: twine upload --repository-url https://test.pypi.org/legacy/  dist/*
+    run: twine upload --repository-url https://test.pypi.org/legacy/  dist/*
     # test_workflow-1.0.5-py3-none-any.whl
-    run: twine upload --repository-url https://test.pypi.org/legacy/  dist/$PKG-$VERSION-py3-none-any.whl
+    # run: twine upload --repository-url https://test.pypi.org/legacy/  dist/$PKG-$VERSION-py3-none-any.whl
     shell: bash
     env:
       TWINE_USERNAME: __token__
