@@ -30,6 +30,11 @@ runs:
   #   run: | 
   #     aaa = ${{ inputs.RAISE_PR }}   ; echo $aaa
   #   shell: bash
+
+  - name: LS
+    if: github.ref == 'refs/heads/main'
+    run: tree ./dist
+    shell: bash
     
   - name: Install Tree
     run: sudo apt-get install tree -qq
@@ -118,7 +123,12 @@ runs:
     if: github.ref == 'refs/heads/main'
     run: echo -e "\033[1;32m============================== BUILD PACKAGE/DOC AND MAKE RELEASE ===============================\033[0m"
     shell: bash
-    
+
+  - name: TREE BEFORE PDM
+    if: github.ref == 'refs/heads/main'
+    run: tree ./dist
+    shell: bash
+
   - name: Build package
     if: github.ref == 'refs/heads/main'
     run: python3 -m pdm build --no-sdist
